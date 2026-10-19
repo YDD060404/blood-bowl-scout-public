@@ -1,0 +1,48 @@
+#standard-task-rankings table {width:100%;min-width:650px;border-collapse:collapse;text-align:left}
+#standard-task-rankings th,#standard-task-rankings td {padding:12px;border-bottom:1px solid #ffffff20}
+#standard-task-rankings td small,.team-matchup-result td small {display:block;color:#a6b7c1;margin-top:5px}
+#standard-task-rankings select,#standard-task-rankings input {max-width:100%}
+.integrated-compare-radars {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.integrated-grade {font-size:16px;color:#e7c876}
+@media(max-width:600px){.integrated-compare-radars{grid-template-columns:1fr}#standard-task-rankings .ranking-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
+.integrated-rail-radar {display:block;width:96px;flex-shrink:0}
+.integrated-rail-radar .st-radar {width:96px;height:96px;display:block}
+.integrated-rail-radar .st-caption {display:none}
+.integrated-rail-radar .st-radar text {font-size:13px}
+.standard-featured .featured-action {white-space:normal}
+.ranking-controls .integrated-leagues {position:relative;min-width:0;color:#d9e2dc;font-size:14px}
+.ranking-controls .integrated-leagues>summary {display:flex;align-items:center;justify-content:space-between;gap:5px;min-height:40px;padding:0 9px;border:1px solid #344148;background:#101920;cursor:pointer;list-style:none}
+.ranking-controls .integrated-leagues>summary::-webkit-details-marker {display:none}
+.ranking-controls .integrated-leagues>summary::after {content:'▾';color:#c7a95d}
+.ranking-controls .integrated-leagues[open]>summary::after {content:'▴'}
+.ranking-controls .integrated-leagues>summary:focus-visible {outline:2px solid #c7a95d;outline-offset:2px}
+.ranking-controls .integrated-leagues>div {position:absolute;left:0;right:0;z-index:60;background:#111d22;border-left:1px solid #344148;border-right:1px solid #344148}
+.ranking-controls .integrated-league-tools {top:40px;display:flex;gap:5px;padding:8px;border-top:1px solid #344148}
+.ranking-controls .integrated-league-tools input[type=search] {flex:1;min-width:80px;height:32px;font-size:14px}
+.ranking-controls .integrated-league-tools button {flex:none;border:1px solid #53635e;background:#1b2b2d;color:#d9e2dc;font-size:12px;cursor:pointer}
+.ranking-controls .integrated-league-options {top:88px;max-height:220px;overflow:auto;border-bottom:1px solid #344148;padding:4px;color-scheme:dark}
+.ranking-controls .integrated-league-options label {display:flex;align-items:center;gap:8px;min-height:36px;padding:6px 8px;color:#d9e2dc;font-size:14px;line-height:1.3;cursor:pointer}
+.ranking-controls .integrated-league-options label:hover {background:#223337}
+.ranking-controls .integrated-league-options label[hidden] {display:none}
+.ranking-controls .integrated-leagues input[type=checkbox] {appearance:none;display:grid;place-items:center;flex:none;width:15px;height:15px;min-height:15px;margin:0;padding:0;border:1px solid #72847b;border-radius:3px;background:#142126;cursor:pointer}
+.ranking-controls .integrated-leagues input[type=checkbox]::after {content:'✓';color:#101920;font-size:12px;font-weight:700;line-height:1;opacity:0}
+.ranking-controls .integrated-leagues input[type=checkbox]:checked {background:#c7a95d;border-color:#c7a95d}
+.ranking-controls .integrated-leagues input[type=checkbox]:checked::after {opacity:1}
+.ranking-controls .integrated-leagues input[type=checkbox]:disabled {opacity:.35;cursor:default}
+.ranking-controls .integrated-leagues input[type=checkbox]:focus-visible {outline:2px solid #e7c876;outline-offset:2px}
+@media(max-width:600px){.ranking-controls .integrated-leagues{grid-column:span 2}.ranking-controls .integrated-leagues>summary{min-height:40px;padding:0 8px;font-size:14px}.ranking-controls .integrated-league-tools{top:40px}.ranking-controls .integrated-league-options{top:88px}}
+.integrated-overall {display:flex;flex-direction:column;gap:6px;padding:12px;border:1px solid #e7c87660;background:#10181bcc;margin:10px 0;color:#e7c876}
+.integrated-overall b {font-size:20px}
+.integrated-overall small {font-size:12px;color:#b8c5bd;line-height:1.6}
+.rail-card .integrated-overall {padding:7px;flex:1;min-width:0}
+.rail-card .integrated-overall b {font-size:14px}
+.rail-card .integrated-overall small {display:none}
+.standard-featured .rail-team-art {object-fit:contain}
+.integrated-ranking-person {display:flex;align-items:center;gap:12px}
+.integrated-ranking-person>button {padding:0;border:0;background:transparent;flex-shrink:0;cursor:pointer}
+.integrated-ranking-portrait {display:block;width:64px;height:80px;object-fit:contain;background:#10181b;border:1px solid #ffffff25}
+.image-unavailable,.integrated-image-missing {display:inline-block;font-size:12px;padding:8px;color:#c1c8c4}
+.standard-rail .rail-card-bottom {grid-template-columns:minmax(0,1fr) 96px;align-items:center}
+.standard-rail .rail-card-bottom>span:first-child {grid-column:1/-1}
+.standard-rail .integrated-overall {margin:0}
+.standard-rail .integrated-overall span {line-height:1.5;font-size:11px}

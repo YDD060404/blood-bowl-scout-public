@@ -1,0 +1,39 @@
+/* One everyday list. Existing scores and detail tools are retained. */
+.simple-list-view .hero,
+.simple-list-view .quick-stats,
+.simple-list-view .dimension-ribbon,
+.simple-list-view #method,
+.simple-list-view #roster-candidate-comparison,
+.simple-list-view #team-task-selection-comparison,
+.simple-list-view #norse-task-comparison,
+.simple-list-view #research-appendix,
+.simple-list-view #six-axis-candidate-v361,
+.simple-list-view #rankings,
+.simple-list-view .score-version-bar,
+.simple-list-view #survival-weight-playground,
+.simple-list-view .top-links > a:not([data-simple-view]),
+.simple-list-view #catalog .rail-footnote { display:none !important; }
+.simple-list-view[data-simple-view="browse"] #compact-list,
+.simple-list-view[data-simple-view="rank"] #catalog { display:none; }
+.simple-list-view .top-links [data-simple-view] { display:inline-flex; align-items:center; justify-content:center; min-height:40px; padding:8px 14px; border:1px solid var(--line,#586461); border-radius:5px; color:var(--ink,#e8edf0); white-space:nowrap; }
+.simple-list-view .top-links [aria-current="page"] { font-weight:700; border-color:var(--gold,#d4b56b); background:#d4b56b18; }
+.simple-list-view .top-links { display:flex; gap:10px; flex-shrink:0; }
+@media(max-width:380px){.simple-list-view .brand small{display:none;}.simple-list-view .top-links{gap:6px;}.simple-list-view .top-links [data-simple-view]{padding:8px 10px;}}
+@media(max-width:600px){.simple-list-view .topbar .season-chip{display:none;}}
+.simple-list-view #compact-list .rankings-heading p,
+.simple-list-view #compact-list .rankings-heading .eyebrow,
+.simple-list-view #score-version-note { display:none; }
+.simple-list-view #compact-list section { margin-top:12px; padding-top:12px; }
+.simple-list-view #compact-list h2 { font-size:1.5rem; }
+.simple-list-view #compact-list, .simple-list-view #catalog { scroll-margin-top:96px; }
+.simple-list-view .simple-fold { margin:12px 0; border:1px solid var(--line,#586461); border-radius:8px; }
+.simple-list-view .simple-fold > summary { padding:12px 16px; cursor:pointer; font-weight:600; }
+.simple-list-view .simple-fold[open] > section { padding:12px 16px; margin:0; }
+.simple-list-view #simple-task-detail > section > :not(.st-dossier) { display:none; }
+.simple-list-view #simple-task-detail .st-person a[href*="comparison"],
+.simple-list-view #simple-task-detail .st-person a[href*="survival-v9"] { display:none; }
+.simple-list-view #catalog .section-heading .section-subtitle { display:none; }
+.simple-list-view #featured-panel .st-axis-meta { display:none; }
+.simple-list-view #featured-panel .integrated-overall small,
+.simple-list-view #featured-panel a[href*="全赛区球队与球员六维图鉴"] { display:none; }
+.simple-list-view .topbar { position:sticky; top:0; z-index:50; margin-bottom:12px; background:var(--bg,#101714); }

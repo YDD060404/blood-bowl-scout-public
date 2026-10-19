@@ -1,0 +1,17 @@
+#team-survival-pilot{margin:2rem 0;padding:1.4rem;border:1px solid var(--line,#2a353d);border-radius:16px;background:var(--panel,#151f27);min-width:0}
+#team-survival-pilot .survival-pilot-note{padding:1rem;border-left:3px solid #89d1bd;background:#89d1bd0d}
+#team-survival-pilot .survival-pilot-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+#team-survival-pilot article{padding:1rem;border:1px solid var(--line,#2a353d);border-radius:10px;min-width:0}
+#team-survival-pilot article strong{display:block;font-size:1.45rem;color:#a9e1d0;font-variant-numeric:tabular-nums}
+#team-survival-pilot .survival-pilot-bar{position:relative;height:7px;border-radius:3px;background:#ffffff12;overflow:hidden}
+#team-survival-pilot .survival-pilot-bar span{display:block;height:100%;background:#89d1bd}
+#team-survival-pilot .survival-pilot-bar i{position:absolute;top:0;height:100%;background:repeating-linear-gradient(45deg,#89d1bd 0 2px,#364f4b 2px 4px)}
+#team-survival-pilot .survival-pilot-scroll{overflow:auto;width:100%;max-width:100%;margin:.8rem 0}
+#team-survival-pilot table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:.88rem}
+#team-survival-pilot th,#team-survival-pilot td{padding:.65rem;border-bottom:1px solid var(--line,#2a353d);text-align:left;vertical-align:top;min-width:6.5rem}
+#team-survival-pilot th{min-width:12rem}
+#team-survival-pilot small{display:block;color:var(--muted,#aab8bc);font-weight:normal}
+#team-survival-pilot .survival-pilot-skills{min-width:18rem;max-width:28rem}
+#team-survival-pilot select{color:var(--text,#e8edf0);background:var(--panel,#151f27);border:1px solid var(--line,#2a353d);border-radius:6px;padding:.5rem;max-width:100%}
+#team-survival-pilot details{padding:.65rem 0}#team-survival-pilot summary{cursor:pointer}#team-survival-pilot code{overflow-wrap:anywhere}
+@media(max-width:650px){#team-survival-pilot{padding:.85rem}#team-survival-pilot .survival-pilot-cards{grid-template-columns:1fr}}

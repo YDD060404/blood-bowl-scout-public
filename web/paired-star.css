@@ -1,0 +1,14 @@
+/* Two printed players share one contract, but keep separate portraits and cards. */
+.paired-star-portraits { display: inline-flex; align-items: center; justify-content: center; gap: .25rem; max-width: 100%; }
+.paired-star-member-portrait { display: inline-flex; align-items: center; justify-content: center; min-width: 0; flex: 1 1 0; }
+.paired-star-member-portrait img { max-width: 100%; width: auto; height: auto; object-fit: contain; }
+.star-rail-portrait-frame:has(.paired-star-portraits) { width: auto; max-width: 100%; }
+.star-rail-portrait-frame .paired-star-member-portrait img { max-height: 7rem; }
+.featured-title-row .paired-star-member-portrait img { max-height: 11rem; }
+.ranking-avatar .paired-star-member-portrait img, .object-visual-photo .paired-star-member-portrait img { max-height: 3rem; }
+.paired-star-members { display: grid; gap: .75rem; margin-block: 1rem; }
+.paired-star-members h4 { margin: 0; }
+.paired-star-member { padding: .8rem; border: 1px solid currentColor; border-radius: .5rem; }
+.paired-star-member-head { display: flex; align-items: center; gap: .7rem; }
+.paired-star-detail-portrait { max-width: 4rem; max-height: 4rem; object-fit: contain; }
+.paired-star-member p { margin: .4rem 0 0; }

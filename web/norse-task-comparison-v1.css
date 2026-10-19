@@ -1,0 +1,15 @@
+#norse-task-comparison {margin:32px 0;padding:24px;border:1px solid #485b68;background:#111b22}
+#norse-task-comparison p {color:#b8c5bd;line-height:1.8}
+#norse-task-comparison table {border-collapse:collapse;min-width:760px;width:100%;text-align:left}
+#norse-task-comparison th,#norse-task-comparison td {padding:10px;border-bottom:1px solid #ffffff20;vertical-align:top}
+#norse-task-comparison td small {display:block;color:#abb6ad;line-height:1.6;margin-top:5px}
+#norse-task-comparison pre {white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;color:#abb6ad}
+#norse-task-comparison .norse-task {margin:10px 0}
+@media(max-width:600px){#norse-task-comparison{padding:12px}}
+.norse-survival-cards {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:20px 0}
+.norse-survival-cards>div {padding:12px;border:1px solid #77d6c060;background:#101d20}
+.norse-survival-cards b,.norse-survival-cards strong,.norse-survival-cards small {display:block;line-height:1.7}
+.norse-survival-cards strong {font-size:21px;color:#77d6c0;white-space:nowrap}
+.norse-survival-cards small {font-size:11px;color:#a9b9b2}
+@media(max-width:900px){.norse-survival-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.norse-survival-cards strong{font-size:16px}}

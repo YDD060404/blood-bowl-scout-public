@@ -1,0 +1,16 @@
+#team-task-selection-comparison{margin:2rem 0;padding:1.4rem;border:1px solid var(--line,#2a353d);border-radius:16px;background:var(--panel,#151f27)}
+#team-task-selection-comparison[hidden]{display:none}
+#team-task-selection-comparison table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+#team-task-selection-comparison th,#team-task-selection-comparison td{padding:.65rem;border-bottom:1px solid var(--line,#2a353d);text-align:left;vertical-align:top;white-space:nowrap}
+#team-task-selection-comparison td:last-child details{white-space:normal;min-width:15rem}
+#team-task-selection-comparison button{cursor:pointer;color:var(--text,#e8edf0);background:transparent;border:1px solid var(--line,#2a353d);border-radius:5px;padding:.3rem .5rem}
+#team-task-selection-comparison .team-selection-active{background:rgba(100,150,180,.12)}
+#team-task-selection-comparison .team-selection-radars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;max-width:750px;margin:1rem auto}
+#team-task-selection-comparison .team-selection-radars .st-radar{max-width:340px;width:100%;margin:auto}
+#team-task-selection-comparison pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:28rem;overflow:auto;font-size:.8rem}
+#team-task-selection-comparison summary{cursor:pointer;padding:.5rem 0}
+#team-task-selection-comparison .team-selection-task{padding:.5rem 0;border-bottom:1px solid var(--line,#2a353d)}
+#team-task-selection-comparison [data-team-selected]{margin-top:1.5rem}
+@media(max-width:600px){#team-task-selection-comparison{padding:.85rem}.team-selection-radars h4{font-size:.9rem}#team-task-selection-comparison .team-selection-radars{gap:.25rem}}
+
+#team-task-selection-comparison td:last-child{white-space:normal;min-width:7rem;max-width:26rem}

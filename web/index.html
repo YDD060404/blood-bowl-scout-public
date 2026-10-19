@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<script src="pako_inflate.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0e151c">
+  <meta name="description" content="Blood Bowl 全赛区、球队、球员与明星的六维比赛价值图鉴。">
+  <title>六维球探 · Blood Bowl 图鉴</title>
+  <link rel="stylesheet" href="styles.css?v=layout-fix-20261005">
+  <script defer src="atlas-data-v701.js?v=model-v7.0.1-current-highElf-20261004"></script>
+  <script defer src="team-roster-adjustments-v701.js?v=team-roster-adjustments-v701-20261004"></script>
+  <script defer src="base-portraits.js?v=base-portraits-current-rosters-20261002"></script>
+  <script defer src="skill-catalog.js?v=model-v57-20260930"></script>
+  <script defer src="skill-effects.js?v=model-v57-20260930"></script>
+  <script defer src="skill-eligibility.js?v=model-v100-high-elf-v367-20261004"></script>
+  <script defer src="scoring.js?v=model-v104-axis-specific-team-rosters-20261004"></script>
+  <script defer src="vendor/bloodboard-engine-v7.0.1.js?v=bloodboard-v7.0.1-20261004"></script>
+  <script defer src="bloodboard-engine-adapter-v7.0.1.js?v=bridge-v7.0.1-20261004"></script>
+  <script defer src="evaluation-model-v3.js?v=model-v3-33-player-dossiers-20261002"></script>
+  <script defer src="team-task-importance-v397.js?v=team-context-v397-20261004"></script>
+  <script defer src="team-carrier-context-v398.js?v=team-carrier-context-v398-20261004"></script>
+  <script defer src="player-task-suite.js?v=suite-v1-player-star-20261002"></script>
+  <script defer src="touchdown-task-suite-v335.js?v=held-ball-v335-20261002"></script>
+  <script defer src="task-rankings.js?v=task-rank-v2-v6.1-weapons-20261004"></script>
+  <script defer src="player-task-ranking-data-v701.js?v=current-v7.0.1-task-ranks-20261004"></script>
+  <script defer src="provisional-calibration-v334.js?v=calibration-v2-format-safe-20261002"></script>
+  <script defer src="provisional-calibration-v336.js?v=calibration-v336-held-touchdown-20261002"></script>
+  <script defer src="touchdown-browser-data-v335.js?v=touchdown-evidence-v335-20261002"></script>
+  <script defer src="team-task-evidence-v337.js?v=legal-team-evidence-v337-20261002"></script>
+  <script defer src="team-task-evidence-v338.js?v=roster-ledger-v338-20261002"></script>
+  <script defer src="team-roster-legality-v338.js?v=team-legality-status-20261004"></script>
+  <script defer src="team-roster-legality-v701.js?v=team-legality-v7.0.1-20261004"></script>
+  <script defer src="team-task-browser-data-v338.js?v=roster-ledger-v338-20261002"></script>
+  <script defer src="team-browser-data-v337.js?v=reference-team-data-v337-20261002"></script>
+  <script defer src="portrait-crops.js?v=model-v74-20260930"></script>
+  <script defer src="six-axis-candidate-data-v410.js?v=lethality-bridge-v410-20261004"></script>
+  <script defer src="six-axis-candidate-data-v704.js?v=v704-held-ball-touchdown-20261005"></script>
+  <script defer src="six-axis-candidate-data-v705.js?v=v705-handoff-team-reroll-20261005"></script>
+  <script defer src="six-axis-candidate-data-v706.js?v=v706-reroll-sensitivity-20261005"></script>
+  <script defer src="six-axis-candidate-data-v707.js?v=v707-canonical-task-ranks-20261005"></script>
+  <script defer src="six-axis-candidate-data-v708.js?v=v708-roundoff-normalized-ball-transfer-20261005"></script>
+  <script defer src="six-axis-candidate-data-v709.js?v=v709-special-action-pools-20261005"></script>
+  <script defer src="six-axis-candidate-data-v710.js?v=v710-hypnotic-gaze-20261005"></script>
+  <script defer src="six-axis-candidate-data-v711.js?v=v711-guard-support-control-20261005"></script>
+  <script defer src="scoring-reception-role-evidence-v702.js?v=scoring-reception-role-v702-20261005"></script>
+  <script defer src="vampire-runner-support-evidence-v704.js?v=v7-thrall-support-v704-20261005"></script>
+  <script defer src="team-static-strength-context-v410.js?v=team-strength-context-v410-20261004"></script>
+  <script defer src="team-static-strength-context-v416.js?v=team-strength-context-v416-all-legal-20261004"></script>
+  <script defer src="arm-bar-evidence-v411.js?v=arm-bar-fixed-dodge-risk-v411-20261004"></script>
+  <script defer src="star-rule-evidence-data-v393.js?v=star-rule-context-v393-20261005"></script>
+  <script defer src="standard-task-experiment-data-v5.js?v=relative-assigned-v5-20261014"></script>
+  <script defer src="standard-task-experiment-data-v8.js?v=team-best-v8-20261014"></script>
+  <script defer src="standard-task-experiment-data-v9.js?v=team-survival-v9-injury-20261015"></script>
+  <script defer src="standard-task-overall-data-v9.js?v=team-survival-v9-injury-20261015"></script>
+  <script defer src="standard-task-roster-candidate-data-v12.js?v=lethality-joint-and-unified-current-20261017"></script>
+  <script defer src="standard-task-version-loader-v9.js?v=geometric-top8-25705-20261015"></script>
+  <script defer src="team-survival-differences-data-v9.js?v=team-survival-v9-injury-20261015"></script>
+  <link rel="stylesheet" href="team-survival-v9.css?v=team-survival-v9-injury-20261015">
+  <script defer src="survival-independent-data-v10.js?v=independent-survival-20261015"></script>
+  <script defer src="survival-bloodlust-data-v11.js?v=bloodlust-scored-20261015"></script>
+  <script defer src="survival-current-v5.js?v=geometric-top8-25705-20261015"></script>
+  <link rel="stylesheet" href="survival-weight-playground-v1.css?v=survival-current-20261015">
+  <script defer src="team-task-selection-differences-data-v8.js?v=team-best-v8-20261014"></script>
+  <script defer src="team-task-selection-panel-v8.js?v=team-best-v8-20261014"></script>
+  <script defer src="team-survival-pilot-data-v1.js?v=survival-pilot-20261015"></script>
+  <script defer src="team-survival-pilot-panel-v1.js?v=survival-history-v9-20261015"></script>
+  <link rel="stylesheet" href="team-survival-pilot-v1.css?v=survival-pilot-20261015">
+  <link rel="stylesheet" href="team-task-selection-panel-v8.css?v=team-best-v8-20261014">
+  <script defer src="standard-task-rule-impact-map-v1.js?v=standard-task-20261014"></script>
+  <script defer src="current-five-axes-data.js?v=personal-best-team-value-20261018"></script>
+  <script defer src="importance-axis-current.js?v=personal-best-team-value-20261018"></script>
+<script defer src="personal-value-current.js?v=personal-field-contribution-ui-20261018"></script>
+  <script defer src="standard-task-integration-v8.js?v=personal-field-contribution-ui-20261018"></script>
+  <link rel="stylesheet" href="standard-task-integration-v6.css?v=personal-field-contribution-ui-20261018">
+  <script defer src="standard-task-panel-v5.js?v=personal-field-contribution-ui-20261018"></script>
+  <link rel="stylesheet" href="standard-task-panel-v1.css?v=shared-radar-fix-20261014">
+  <script defer src="norse-task-comparison-data-v1.js?v=norse-historical-v8-20261014"></script>
+  <script defer src="norse-task-comparison-panel-v1.js?v=norse-historical-v8-20261014"></script>
+  <link rel="stylesheet" href="norse-task-comparison-v1.css?v=norse-historical-v8-20261014">
+  <script defer src="app.js?v=personal-field-contribution-ui-20261018"></script>
+  <script defer src="team-reference-viewer-v337.js?v=reference-team-ui-v337-20261002"></script>
+  <script defer src="team-reference-ledger-viewer-v338.js?v=roster-ledger-ui-v338-20261002"></script>
+  <script defer src="teamwork-browser-data-v339.js?v=teamwork-evidence-v339-20261003"></script>
+  <script defer src="teamwork-panel-v339.js?v=teamwork-panel-v339-20261003"></script>
+  <script defer src="guard-support-evidence-v400.js?v=guard-support-v400-20261004"></script>
+  <script defer src="goblin-foul-chain-context-v394.js?v=team-kill-context-v394-20261004b"></script>
+  <script defer src="six-axis-candidate-panel-v416.js?v=v711-guard-support-portrait-links-20261005"></script>
+  <link rel="stylesheet" href="six-axis-candidate-panel-v361.css?v=candidate-portraits-direct-profile-20261005">
+  <link rel="stylesheet" href="six-axis-candidate-panel-v393.css?v=partial-radar-v393-20261004">
+  <link rel="stylesheet" href="six-axis-candidate-special-rules-v363.css?v=star-rules-v363-20261004">
+  <link rel="stylesheet" href="simple-list-v13.css?v=personal-field-contribution-ui-20261018">
+  <script defer src="simple-list-v13.js?v=personal-field-contribution-ui-20261018"></script>
+  <link rel="stylesheet" href="paired-star.css?v=mandatory-pairs-current-20261018">
+</head>
+<body class="simple-list-view">
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="六维球探首页">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span><strong>六维球探</strong><small>BLOOD BOWL ATLAS</small></span>
+      </a>
+      <nav class="top-links" aria-label="主导航">
+        <a href="#catalog" data-simple-view="browse">浏览</a>
+        <a id="six-axis-nav" href="#standard-task-experiment">标准任务六维</a>
+        <a href="#compact-list" id="standard-ranking-nav" data-simple-view="rank">排行榜</a>
+        <a href="survival.html">完整生存榜 · 三项可调</a><a href="?score=candidate#roster-candidate-comparison">新军表前后对照</a><a href="#norse-task-comparison">历史诺斯诊断</a>
+        <a href="#rankings" data-score-history>历史候选榜</a>
+        <a id="score-method-nav" href="#standard-task-experiment">评分说明</a>
+      </nav>
+      <span class="season-chip"><span class="live-dot"></span> 球探手册 · 2026</span>
+    </header>
+
+    <main id="top">
+      <div id="compact-list">
+        <section id="standard-task-rankings" class="rankings-section" aria-label="标准任务综合与六维排行榜">
+          <h2>排行榜</h2>
+          <p role="status">正在加载当前球队、球员与明星排行榜…</p>
+          <noscript>排行榜需要启用 JavaScript 才能加载数据和筛选。</noscript>
+        </section>
+      </div>
+      <section class="hero" aria-label="奇幻联赛主视觉">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-square"></span> BLOOD BOWL · 六维比赛价值</p>
+          <h1>好球员，<br>要看他能改变什么。</h1>
+          <p class="hero-lede">把属性、技能、名单结构，翻译成球场上真正有用的六种能力。</p>
+          <a class="hero-cta" href="#catalog">打开球探图鉴 <span aria-hidden="true">↘</span></a>
+        </div>
+        <div class="hero-caption"><span>01 / 10</span><span>THE GRAND LEAGUE</span><span>夜场 · 第七回合</span></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+      </section>
+
+      <section class="score-version-bar" aria-label="评分版本选择">
+        <label for="score-version-mode">评分版本</label>
+        <select id="score-version-mode" disabled><option value="candidate">当前评分</option></select>
+        <p id="score-version-note">主分采用绝对任务表现；未完成模板显示范围，历史数据可随时切换。</p>
+      </section>
+      <section id="catalog" class="catalog-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow muted"><span class="eyebrow-square"></span> THE SCOUTING ROOM</p>
+            <h2>球探中心</h2>
+            <p class="section-subtitle">上方查看当前对象的完整数据与六边形图，下方横向滑动比较并切换对象。</p>
+          </div>
+          <div data-score-history class="rank-legend" aria-label="相对排名等级">
+            <span class="grade grade-ap">A+</span><span class="grade grade-a">A</span><span class="grade grade-am">A−</span><span class="grade grade-bp">B+</span><span class="grade grade-b">B</span><span class="grade grade-bm">B−</span><span class="grade grade-c">C</span><span class="grade grade-d">D</span><span class="grade grade-e">E</span>
+            <small>六维候选/实验等级 · 非胜率</small>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="view-tabs" role="tablist" aria-label="图鉴分类">
+            <button class="view-tab is-active" role="tab" aria-selected="true" data-view="teams">球队阵容</button>
+            <button class="view-tab" role="tab" aria-selected="false" data-view="players">球员档案</button>
+            <button class="view-tab" role="tab" aria-selected="false" data-view="stars">明星球员</button>
+          </div>
+          <div class="catalog-search">
+            <label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="全站搜索球队、球员、明星…" autocomplete="off" aria-controls="catalog-search-results" aria-expanded="false" aria-keyshortcuts="Control+K Meta+K"><kbd>⌘ K</kbd></label>
+            <div id="catalog-search-results" class="catalog-search-results" role="listbox" aria-label="全站搜索结果" hidden></div>
+          </div>
+          <button id="reset-filters" class="reset-button" type="button">重置</button>
+        </div>
+
+        <div class="browse-filters">
+          <div class="filter-row">
+          <span class="filter-label">赛区（可多选）</span>
+          <div id="league-strip" class="league-strip" role="group" aria-label="按一个或多个赛区筛选；点击所有赛区清空选择">
+            <button type="button" class="filter-chip league-chip is-active" data-league="">所有赛区</button>
+          </div>
+          </div>
+          <div class="filter-row" id="format-row">
+          <span class="filter-label">赛制</span>
+          <div class="format-switch" id="format-switch" role="group" aria-label="选择七人制或十一人制；未选中时显示全部赛制">
+            <button type="button" class="filter-chip format-chip" data-format="sevens" aria-pressed="false">七人制</button>
+            <button type="button" class="filter-chip format-chip" data-format="standard" aria-pressed="false">十一人制</button>
+          </div>
+          <span class="format-hint" id="format-hint">未筛选时同时显示两种赛制</span>
+          </div>
+        </div>
+
+        <div class="results-bar"><div id="result-heading"><b>全部球队阵容</b><span>选中下方卡片查看球队介绍和完整六维</span></div><div id="result-count" class="result-count"></div></div>
+        <div id="featured-panel" class="featured-panel" aria-live="polite"></div>
+        <div class="rail-heading"><div><b id="rail-title">横向浏览球队</b><span id="rail-hint">滑动卡片查看并比较六维轮廓</span></div><span class="rail-scroll-hint" aria-hidden="true">← 横向滑动 →</span></div>
+        <div id="catalog-list" class="catalog-rail"></div>
+        <div class="rail-footnote" id="rail-footnote"></div>
+      </section>
+
+      <details class="research-appendix" id="research-appendix">
+        <summary><span><b>规则与阵容研究附录</b><small>球队名单、团队支援与固定情境证据；日常浏览可忽略</small></span><span class="appendix-state">按需展开</span></summary>
+        <div class="research-appendix-body">
+      <section id="team-reference-evidence" class="reference-evidence-section" aria-labelledby="team-reference-evidence-title">
+        <div class="section-heading"><div><p class="eyebrow muted">REFERENCE ROSTERS · v3.37</p><h2 id="team-reference-evidence-title">参考名单的职责与接任证据</h2><p class="section-subtitle">四份认证名单的限定局面；展开查看阵容证书、缺阵、重分工与下一进攻段替补。</p></div></div>
+        <div id="team-reference-evidence-content"><p>正在载入保存的参考证据；不生成球队总分。</p></div>
+      </section>
+
+      <section id="team-reference-ledger" class="reference-evidence-section v338-ledger-section" aria-labelledby="team-reference-ledger-title">
+        <div class="section-heading"><div><p class="eyebrow muted">ROSTER QUALIFICATION · v3.38</p><h2 id="team-reference-ledger-title">全部参考名单：资格与取球任务</h2><p class="section-subtitle">逐份查看 60 个参考名单的固定引擎校验与可用的开阔/受标记取球证据。仅报告声明条件下的任务概率，不生成球队实力总分或跨队强度排名。</p></div></div>
+        <div id="team-reference-ledger-content"><p>正在载入 60 份名单账本与任务证据。</p></div>
+      </section>
+
+      <section id="teamwork-v339" class="reference-evidence-section v339-teamwork-section" aria-labelledby="teamwork-v339-title">
+        <div class="section-heading"><div><p class="eyebrow muted">TEAMWORK SNAPSHOTS · v3.39</p><h2 id="teamwork-v339-title">团队支援：固定情境样本</h2><p class="section-subtitle">比较真实合法名单在预先声明站位下的支援计划。只展示引擎枚举概率与配对差值，不产生球队总分、胜率或六维总评。</p></div></div>
+        <div id="teamwork-v339-content"><p>正在载入 V3.39 支援样本。</p></div>
+      </section>
+
+        </div>
+      </details>
+
+      <section id="standard-task-experiment" class="st-experiment" aria-label="标准任务实验评分"></section>
+
+      <section data-score-history id="six-axis-candidate-v361" class="v361-section" aria-labelledby="v361-title">
+        <div class="section-heading">
+          <div><p class="eyebrow muted">SIX-AXIS SCOUTING · V7.0.1 TASK RANKS</p><h2 id="v361-title">球员与明星：六维候选榜</h2><p class="section-subtitle">当前六维候选已使用 Bloodboard V7.0.1 同条件任务排名点；V7 暂缺的快攻得分链、角色覆盖及稀有特攻部分保留明确标记的旧代理。展开卡片可逐项核对来源、覆盖和概率。</p></div>
+          <span class="v361-status">V7.0.1 任务点已进入六维 · 候选模型</span>
+        </div>
+        <div class="v361-callout"><b>当前阶段版本 · V3.149</b><span>326 份球员与明星源档案均保留完整六维画像；个人 V7 任务分位和总评按每赛制一个规范基础球员档案重算，当前为 314 份规范档案。12 份非规范技能变体仍保留供球队构筑计算，不再参与个人排名。V3.147 修正明星适配计算：被评估的明星现在保证占用阵容名额，不会因分数较低而在汇总时被截掉。V3.148 统一解析明星激活规则的原始任务结果字段，18/18 条规则现均可在相应明星卡看到数值证据；这不表示触发频率已知或已计入六维。球员快攻与适应力含 V7.0.1 任务赋分；Vampire Runner 与 Thrall 的固定站位条件收益单独展示。控球交接球排名仍按一枚团队重掷的同条件队列计分（275/314）；任务详情并列显示无重掷与一枚共享重掷的精确概率。球队第六维现在比较完整阵容与低人数重组阵容（十一人制 6/7 人、七人制 4/5 人）的五类角色任务，并将角色覆盖与队伍贡献各按 50% 合成；开路支援当前明确使用 V410 代理。它是参考阵容的能力指数，不是随机减员模拟或胜率。明星增益现与球队六维候选评分共用同一聚合管线；其逐队收益仍是能力代理，不是规则化净收益或比赛胜率。球队校准、明星逐队规则触发频率和比赛级胜率仍未完成。</span></div>
+        <div class="v361-callout"><b>规则特例与支援证据</b><span>Bloodboard V6.1 的 18 条明星激活开始规则均有专项任务证据（17 项精确、1 项区间）；V3.148 已把不同原始数据结构统一显示为触发前后条件概率/任务结果；V3.149 将动态控区变化按格数展示，避免误读成概率，并在 Kiroth、Zolcath 卡展示预期对手控区格变化。对应固定情境可在明星卡详情展开。Guard 盯防下支援队友阻挡的配对概率也已接入 Gnome Beastmaster、Estelle la Veneaux、Ivar Eriksson、Rowana Forestfoot 档案。触发机会率仍未估，所以条件结果尚未计入六维无条件分数；后续还需覆盖被动特殊能力与其他规则组合。</span></div>
+        <div class="v361-callout"><b>个人杀伤与球队机会分开</b><span>Ooligan、Loony、The Black Gobbo 等对应档案展开后，可查看一组固定 Goblin 阵容的整链概率：巨魔阻挡、出现合法倒地目标、犯规及额外犯规，分别列出安全移出和 Turnover。它只作球队情境证据，不计入球员个人六维；不外推为整场机会率或通用球队排名。</span></div>
+        <div class="v361-callout"><b>技能与特性覆盖 · Bloodboard V6.1</b><span>当前 108 项技能/特性规则目录包括 36 项 Trait 类能力；108/108 均已对接引擎规则入口和至少一个六维路由。Trait 类按计分路径分为 20 项公式、11 项需触发的场景、5 项队伍情境。已有所选任务证据：36 项累计重放 926 次，其中 12 项观察到结果变化、8 项只观察到行动资格变化、16 项在所选任务中没有观察到概率变化。后两类并非无效；实际触发机会和其余组合仍需补齐。技能与特性逐项路线见下方规则附录。</span></div>
+        <div class="v361-callout"><b>读数说明 · 候选分与证据覆盖</b><span>有多类引擎证据的轴保留同条件任务排名点；仅有部分证据时采用已有任务族结果；仍缺数据时用属性与技能代理补齐，并在每张卡标出“规则属性估算”。六轴按快攻22%、控球18%、杀伤16%、生存15%、控场15%、适应力14%合成个人总评分，再在同赛制球员与明星中排名赋分并给等级。No Ball 的快攻和控球仍按规则为 0。代理值用于当前完整比较，不是引擎概率；逐队球队增益看独立球队情境。</span></div>
+        <div class="v361-controls" aria-label="六维候选筛选">
+          <label><span>对象</span><select id="v361-kind"><option value="all">球员与明星</option><option value="player">基础球员</option><option value="star">明星球员</option></select></label>
+          <label><span>赛制</span><select id="v361-format"><option value="all">全部赛制</option><option value="11s">十一人制</option><option value="sevens">七人制</option></select></label>
+          <label><span>排序维度</span><select id="v361-axis"><option value="overallScore">球员 / 明星总评</option><option value="fastAttack">快攻</option><option value="ballControl">控球</option><option value="lethality">杀伤</option><option value="survival">生存</option><option value="control">控场</option><option value="adaptability">适应力</option></select></label>
+          <label><span>显示数量</span><select id="v361-limit"><option value="25">前 25 名</option><option value="50">前 50 名</option><option value="100">前 100 名</option><option value="all">全部结果</option></select></label>
+          <button id="v361-reverse" type="button" aria-pressed="false">反向排序</button>
+          <label class="v361-search"><span>搜索</span><input id="v361-search" type="search" autocomplete="off" placeholder="球员、技能、球队"></label>
+        </div>
+        <div class="v361-summary" id="v361-summary" aria-live="polite"></div>
+        <div class="v361-list" id="v361-list" aria-live="polite"><p>正在载入六维候选数据…</p></div>
+        <p class="v361-footnote">当前源数据有 260 份基础球员赛制档案和 66 名明星；去重后的个人榜有 248 份基础球员赛制档案和 66 名明星，12 份重复变体仍供球队实际名单汇总。每份规范档案都有六轴候选和相对总评，但 314/314 有数值不等于完整引擎证据：快攻与适应力持球推进各有 291 份 V7.0.1 同条件赋分，接应 309 份、稳定突袭 304 份；封路保护与小样本回退仍标记为 V410 代理。固定任务详情列出无重掷/一枚共享重掷两种概率及当前排名点；同一达阵证据同时服务快攻/适应力，须注意相关性。Vampire 队伍详情另列当前引擎下 Thrall 站位敏感度，尚未进入无条件球队分。控球交接子项另有 275/314 份一枚团队重掷同条件排名；技能、六维来源与完成边界见当前完成度审计。球队 60 套参考构筑均通过 V7.0.1 校验；球队仍是阶段实验分，不是正式强弱榜。</p>
+      </section>
+
+      <section id="roster-candidate-comparison" aria-label="1150K候选军表与同口径V11新旧对照"></section>
+      <section id="survival-weight-playground" aria-label="生存权重手调与未取整试算排行"></section>
+      <section id="team-task-selection-comparison" aria-label="全队任务择优与更新前后对照"></section>
+
+      <section id="norse-task-comparison" aria-label="诺斯人选与生存拆解对照"></section>
+
+      <section data-score-history id="rankings" class="rankings-section" aria-labelledby="rankings-title">
+        <div class="rankings-heading">
+          <div>
+            <p class="eyebrow muted"><span class="eyebrow-square"></span> THE LEADERBOARD</p>
+            <h2 id="rankings-title">球探排行榜</h2>
+            <p class="section-subtitle">排行榜展示声明条件下的单项规则任务概率；球员与明星六维区展示 V7.0.1 同条件任务排名点与明确标注的旧代理形成的候选画像。两者都可筛选、比较和追溯；球员/明星已提供暂定六维总评；球队新增同赛制六维阵容能力实验榜，尚未完成 Bloodboard 团队任务校准；明星逐队代理增量已接入；本次新增同赛制六维对照和明星补强代理建议，胜率/规则化净增益仍未校准。</p>
+          </div>
+          <span class="rankings-note">实验参考榜 · 不能视为官方实力或招募结论</span>
+        </div>
+        <div class="ranking-controls" aria-label="排行榜筛选条件">
+          <label><span>对象</span><select id="ranking-kind"><option value="teams">球队</option><option value="players">基础球员</option><option value="stars">明星球员</option></select></label>
+          <label><span>比较依据</span><select id="ranking-source"><option value="raw">规则任务概率</option><option value="calibrated">暂定六维赋分 · v3.36</option><option value="legacy">旧代理对照</option></select></label>
+          <label><span>排名项目</span><select id="ranking-metric"></select></label>
+          <label id="ranking-task-policy-label" hidden><span>有限团队重掷</span><select id="ranking-task-policy"><option value="withoutTeamRerolls">禁止团队与 Leader 重掷</option><option value="withTeamRerolls">允许一枚团队重掷</option></select></label>
+          <button type="button" class="ranking-cost-toggle" id="ranking-direction-toggle" aria-pressed="false" title="点击反转当前排名方向">反向排序</button>
+          <button type="button" class="ranking-cost-toggle" id="star-cost-toggle" hidden>查看明星性价比排行</button>
+          <div class="ranking-league-filter" id="ranking-league-filter"><span>赛区</span><details class="ranking-league-picker"><summary id="ranking-league-summary">所有赛区</summary><div class="ranking-league-menu"><label class="ranking-league-search"><span class="sr-only">搜索赛区</span><input id="ranking-league-search" type="search" placeholder="搜索赛区…" autocomplete="off"></label><div id="ranking-league-options" class="ranking-league-options" role="group" aria-label="选择一个或多个赛区"></div><button id="ranking-league-clear" type="button">清除赛区</button></div></details></div>
+          <label><span>赛制</span><select id="ranking-format"><option value="">全部赛制</option><option value="sevens">七人制</option><option value="standard">十一人制</option></select></label>
+          <label><span>显示</span><select id="ranking-limit"><option value="10">前 10 名</option><option value="25" selected>前 25 名</option><option value="50">前 50 名</option><option value="all">全部</option></select></label>
+          <label class="ranking-search"><span>搜索榜单</span><input id="ranking-search" type="search" placeholder="名称、球队、技能…" autocomplete="off"></label>
+        </div>
+        <section class="coach-skill-control" aria-labelledby="coach-skill-title">
+          <div class="coach-skill-copy">
+            <p class="eyebrow muted">COACH SKILL · PLAYER LEVEL</p>
+            <h3 id="coach-skill-title">选择玩家水平</h3>
+            <p id="coach-level-description">理解常见阵型、技能运用、推进和防守恢复。当前底层 Coach Skill = 60/100。</p>
+          </div>
+          <div class="coach-skill-range">
+            <div class="coach-level-label"><b id="coach-level-label">老手 · Experienced</b><span>球队总评与详情实时重算</span></div>
+            <input id="coach-skill-slider" type="range" min="0" max="2" step="1" value="1" aria-label="选择新手、老手或高手玩家水平">
+            <div class="coach-level-ticks" aria-hidden="true"><span>新手 · 25</span><span>老手 · 60</span><span>高手 · 90</span></div>
+          </div>
+          <p class="coach-skill-note">滑块作用于旧任务指数的教练情境预览；规范六维和正式 Strength 尚未接管此榜。战术行为与队友配合仍需校准。</p>
+        </section>
+        <div class="ranking-summary" id="ranking-summary" aria-live="polite"></div>
+        <div class="ranking-list" id="ranking-list" aria-live="polite"></div>
+        <p class="ranking-footnote">球队榜纳入 60/60 套同赛制参考构筑；V6.1 标准化修正记录可在球队详情查看。快攻、控球、杀伤由球员任务画像按各轴最佳 11/7 人及指数衰减权重聚合；阵容差额以旧规则公式边际值修正。生存、控场的基础值分别取个人任务聚合分与 V6.1 整队固定受击/静态控区任务的同赛制名次点均值；之后把“当前力量名单 vs 同名单全员 ST3”的留区差分别排名赋分，每轴按高于中位数的部分每点 +0.5、最多 +25 加入，低于中位数不倒扣。适应力仍按全队角色接班代理计算。先得到六个已赋分维度，再按 22/18/16/15/15/14 权重直接合成球队总评分；只对最终总评分做球队间排名赋分，不重复给六个球队维度排名赋分。新增力量增量参数尚未用比赛数据校准；所有球队分仍是实验代理，不是胜率或正式 Tier。固定 ST4 阻挡阵型未覆盖所有战术部署；明星逐队规则化净收益仍待完成。价格显示在球员名称旁，反向排序按钮可翻转当前项目顺序。</p>
+      </section>
+
+      <section class="quick-stats" aria-label="图鉴范围">
+        <div><strong id="stat-leagues">10</strong><span>赛区</span></div>
+        <div><strong id="stat-rosters">31</strong><span>种族球队</span></div>
+        <div><strong id="stat-builds">62</strong><span>实编阵容</span></div>
+        <div><strong id="stat-players">—</strong><span>基础球员模板</span></div>
+        <div><strong id="stat-stars">66</strong><span>明星球员</span></div>
+        <div class="stat-note">实编名单共 <b id="stat-player-slots">—</b> 个球员名额<br>重复档案已合并 · 分数不是胜率</div>
+      </section>
+
+      <section class="dimension-ribbon" aria-label="六项比赛维度">
+        <div class="ribbon-label">六项比赛价值</div>
+        <div class="dimension-item"><span class="dim-index">01</span><b>快攻</b><small>推进 · 得分窗口</small></div>
+        <div class="dimension-item"><span class="dim-index">02</span><b>控球</b><small>获取 · 保留 · 转移</small></div>
+        <div class="dimension-item"><span class="dim-index">03</span><b>杀伤</b><small>击倒 · 破甲 · 减员</small></div>
+        <div class="dimension-item"><span class="dim-index">04</span><b>生存</b><small>留场 · 承伤</small></div>
+        <div class="dimension-item"><span class="dim-index">05</span><b>控场</b><small>封路 · 牵制</small></div>
+        <div class="dimension-item"><span class="dim-index">06</span><b>适应力</b><small id="adaptability-axis-hint">角色广度 · 受压保底</small></div>
+      </section>
+
+      <section data-score-history id="method" class="method-section">
+        <div class="method-title"><p class="eyebrow muted"><span class="eyebrow-square"></span> HOW TO READ</p><h2>六边形怎么看</h2></div>
+        <div class="method-copy">
+          <p>当前约定的六维是 <b>快攻、控球、杀伤、生存、控场、适应力</b>。适应力拆成个人角色覆盖，以及放进指定阵容后的队内贡献；队内重要性通过移除球员、允许替补接任/重新分工，再与普通同位置球员替换作差。可靠性仍是每项任务都要检查的成功条件和风险记录，不再单列为第六维。</p>
+          <p><b>当前版本口径：</b>V3.155 主图鉴、基础球员排行和六维候选榜均按同赛制规范档案处理重复模板；十一人制、七人制分别比较。326 份原始球员/明星档案仍有六轴候选；个人任务赋分队列和总评名次按 314 份规范档案重算（248 份基础球员赛制档案＋66 名明星）。12 份同名技能变体不再重复挤占个人名次，但保留在球队构筑内部数据中。球队适配明星的增量模拟现已强制将所评明星（配对时两人）纳入实际上场人数，并对六轴和角色任务一致执行。主排行榜赛区筛选现在支持搜索、多选和本机记忆；多选条件同步作用于明星适配与性价比。球队榜、球员榜、明星榜均可同时跨选赛区。图鉴顶部搜索提供球队阵容、基础球员、明星球员分组结果，方向键/回车可直接跳转，⌘K/Ctrl+K 聚焦搜索；主图鉴、主排行榜和六维候选榜筛选均保存在本机；清除筛选可恢复默认。赛制继续使用快捷按钮，球队对局保留赛区→球队类型→具体阵容级联。V3.155 球队/明星增益统一使用当前球队总评权重 22/18/16/15/15/14；16 人超额时只按球队总评前五维权重移出原阵容最低者。对局建议新增合法技能单项提升试算，沿用个人技能边际分并明确标为估算。V3.154 固定 Guard 支援增量纳入动态控场任务族，先平均任务内重掷排名，再对七类任务等权；无 Guard 档案以零边际贡献为同赛制基线。V3.153 将 Hypnotic Gaze 固定屏障任务纳入控场：十一人制七份同条件档案按15%权重赋分，七人制三个样本只展示概率、不排名；Monstrous Mouth 与 Punt 也展示引擎结果，但因缺少可比样本不计分。V3.152 将六类精确特殊攻击和条件自伤概率纳入杀伤/生存候选分，按同赛制专项任务池名次赋分，并显示各武器概率与重掷敏感度；Bombardier 区间和附带伤害只展示、不伪造精确分。V3.151 修正 V7 精确概率被浮点误差排除的问题（容差 1e-12），并将交接与固定 3 格传球分别排名后纳入控球转移任务族；原始任务和重掷条件仍分开标注。V3.142 球队适应力由角色覆盖与队伍贡献各占 50%，以低人数阵容中五类角色任务衡量；角色分工仍未处理同一球员多任务冲突、随机减员、棋盘站位与行动顺序。球队及明星逐队收益仍是能力代理，不是比赛胜率或规则化净收益。正式球员实战校准仍为 0/314，球队校准为 0/60；任务执行率 6,306/6,312（99.9%），60/60 参考名单通过规则校验。18 条明星激活规则的固定任务结果均可查看，但触发机会率尚未估计，因此仍不进入六维无条件总分；球队校准和比赛级胜率仍待完成。<span>查看 V3.154 阶段进度与边界（后台资料）</span>。</p>
+        <p>官方 Tier 有赛事与规则平衡依据，是外部校准信号，不进入评分公式，也不等同完整实力榜。2026 标准制与 Sevens 官方表各列 30 队；与当前实验 Strength 对照的跨档逆序比例为 16.0% / 29.4%，差异用于触发模型复查，不要求强行归零。已找到七人制漏项：旧评没有 Veteran 一次性重掷与球队重掷池；Bloodboard 任务桥接已接入 Veteran，但团队资源还未进入总评。详细名次和边界见 <span>官方分级校准审计（后台资料）</span>。<a href="https://assets.warhammer-community.com/eng_20-05_blood_bowl_teamtiers-rhnqpyom8r-4rpfatdubw.pdf" target="_blank" rel="noreferrer">标准 Tier 表</a> · <a href="https://assets.warhammer-community.com/19-08_blood_bowl_sevens_team_tiers-kzhghr77dz-d7tlkgeuuc.pdf" target="_blank" rel="noreferrer">Sevens Tier 表</a> · <a href="https://www.warhammer-community.com/en-gb/articles/wqewdcvv/blood-bowl-faqs-games-designers-notes/" target="_blank" rel="noreferrer">2026-05 Dwarf 调整说明</a></p>
+          <p>以下折叠区保留的是旧版任务代理公式，供追溯历史结果。明星招募价值仍按可用球队阵容逐套计算，独立于明星个人暂定六维；队伍侧待合法阵容任务完成后再进入标定。</p>
+          <p><b>机动 v3.36：</b>在原 35% / 40% / 25% 结构中，仅把中间的无球移动曲线替换为已持球 4/6/8 格达阵曲线；其余五轴和综合权重不变。达阵族至少两项可赋分任务才使用，按对象显示 1/3、2/3 或 3/3 覆盖。Grail Knight 与 Pestigor 的两赛制开阔 8 格共有四个主评分输入因终点语义待核对而未计入；Grail Knight 的机动档位变化来自覆盖变化，不代表实际能力下降。额外 Thrall 与受标记 8 格不进入评分。所有综合等级相对修正基线保持不变。</p>
+          <details class="method-formulas">
+            <summary>展开旧版代理公式、固定条件与局限</summary>
+            <div class="formula-grid">
+              <section><h3>排名赋分与重掷</h3><p>同组 <code>N</code> 个对象按原始分降序。并列名次用占据名次的平均数 <code>r̄</code>：<code>P=100×(N−r̄)/(N−1)</code>；只有一个对象时记 100。自然 1 失败、自然 6 成功；普通重掷 <code>p′=p+(1−p)p</code>，Pro 为 <code>p′=p+(1−p)(4/6)p</code>。移动路径逐步追踪 Dodge、Sure Feet、Pro 是否已消耗，只能重掷当前失败项。</p></section>
+              <section><h3>旧版任务与独立情境项</h3><ol>
+                <li><b>快攻：</b>已持球球员的全程可达距离曲线。每格分别计算开阔路线与经过一名标记者的路线，逐步计入闪避、飞跃、冲刺、重掷和行动可用率；并将最长合法移动距离纳入。<code>快攻=100×[0.70×两种路线的平均期望可达距离÷12+0.30×两种路线的平均可用最大距离÷12]</code>。6、8、10 格的站立抵达率仍单独展示；超出最大距离的任务仍记 0，但不会令整条快攻轴归零。No Ball 为 0。</li>
+                <li><b>控球：</b><code>取得=mean(空路拾球概率×抵达率, 受标记拾球概率×抵达率)</code>；<code>保留=mean(普通阻挡后持球, Strip Ball 后持球)</code>；<code>转移=mean(受标记接球, Quick Pass×行动可用率×AG3+ 队友接球)</code>；<code>控球=100×mean(取得,保留,转移)</code>。内部概率统一保持 0–1，最后才换算成 0–100；三组等权是暂定项目指数，原始列仍分开显示。No Ball 为 0。</li>
+                <li><b>杀伤：</b>固定站立目标 ST3/AV9，阻挡骰按双方 ST 决定骰数与选骰方；宣告普通 Block 时，Brawler 可策略性重掷一个 Both Down。阻挡路线指数为 <code>75% × 安全击倒率 + 25% × 安全移出率</code>：安全击倒是主要、可重复的战斗结果；安全移出是更重的后果，且属于击倒子集，所以只作严重度加权，不重复视为独立事件。特殊攻击和已满足条件的犯规分别按其移出率作为替代路线，取可用路线最高值；球队再按杀伤序位使用指数权重，显出多名强力攻击手的阵容深度。各原始击倒、破甲、移出和 turnover 概率仍分列；棋盘位置、整队支援与完整犯规行动链尚未模拟。</li>
+                <li><b>生存：</b>分别面对 ST3、4、5、6 的无支援阻挡者，四种力量基准等权；每种情境依次计算站立、当前留场、下一进攻段可用，再将三项等权合成 <code>生存指数=100×mean(ST基准下的三项结果)</code>。因此高 ST 会直接改变对方阻挡骰数与被推倒概率，力量高即使不移动也有生存收益。倒地与 Wrestle、护甲、伤害表、厚头骨、衰朽和重生分支分别计算。重生只改善之后回场，不增加当前留场率；KO 后续回场按一次 4+ 检定估计。无支援、无边线、无队医是固定情境代理，不是整场生存率。另有独立的 v3 原始任务观察：受击后下次激活能否移动到指定格并以站立状态结束，由 Bloodboard 解析起身、Jump Up、Pick-me-up、移动和 Turnover；目前不并入此旧版生存指数，也不代表球员所有职责的完整执行概率。</li>
+                <li><b>控场：</b>固定对手 AG3+、Dodge、一个标记者；先算牵制、本人阻挡威胁、特殊控制和 Guard 支援，再拆为静态与动态两项。静态守区 <code>=100×mean(固定压制指数, 对手 ST3/4/5/6 阻挡后仍站立率)</code>；动态延伸 <code>=100×固定压制指数×可达距离比例</code>；总控场指数 <code>=min(100, 静态守区+动态延伸)</code>。移动只增加可覆盖范围，不会抹掉低速球员原地已有的控制。Guard 情境是假定 ST3 支援球员被标记：无 Guard 时队友无法助攻；有 Guard 时允许助攻，使 ST3/Block 对 ST3 从一骰变为两骰，支援值是两种情况下安全击倒率的差。ST3/4/5/6 无支援力量基准仍是局部代理，不是整张棋盘路线搜索。力量会改变阻挡骰选择权和击倒风险，但不会抵消已选的 Push；Stand Firm/Rooted 和实际推挤格选择决定位移。总控场是封顶的暂定比较指数，不是概率。</li>
+                <li><b>适应力：个人角色覆盖与队内贡献（历史代理构成，暂未标定）：</b>五种职责（持球推进、得分接应、稳定突袭、封路保护、开路支援）逐项列出任务值 <code>Rᵣ</code> 和单角色阈值覆盖度 <code>Cᵣ=100×clamp((Rᵣ−Lᵣ)/(Hᵣ−Lᵣ),0,1)</code>。前四种角色的 <code>L/H=35/75</code>；开路支援用 Guard 对标准阻挡击倒率的边际百分点、阈值 <code>2/14</code>。目前只展示职责向量，不据这些阈值生成正式个人适应力分。<b>队内贡献</b>须对指定阵容计算完整阵容、移除该球员并允许替补/重新分工、同位置普通球员替换的差值。</li>
+              </ol></section>
+                <section><h3>球队实验总评（接入个人任务画像）</h3><p>球队排名只纳入 V7.0.1 校验通过的构筑。快攻、控球、杀伤、生存、控场五维分别从同赛制 V7.0.1 球员候选画像中选最佳 11/7 人，按 e^(−0.38×序位) 加权汇总；缺少 V7 任务数据的球员轴族回退到有标记的 V410 代理。适应力按全队职责任务及缺员后重分工保留率计算。阵容购买技能及当前规则造成的属性差异，用旧规则公式与基础位置档案的个人边际差暂定修正。生存与控场基础分分别取球员阵容任务点、整队留场/控区任务同赛制排名点的均值；再单独比较当前力量阵容与同名单全 ST3 反事实，把盯防格增量、受击站立率增量、留场率增量分别赋予赛制内名次点，合成后每高于中位 1 点加 0.5 分，单轴最多加 25 分，低于中位不扣分。该项直接体现力量对保住区域和抵御冲击的整队贡献。球队总赋分按快攻22%、控球18%、杀伤16%、生存15%、控场15%、适应力14%加权。V6.1 整队任务是每名上场球员各受一次独立 ST4 Block 的固定压力组合，不是完整回合模拟、威胁频率或胜率。个人候选含部分引擎证据；阵容边际差仍是代理，因此球队榜属于阶段实验，不是正式实力榜。</p></section>
+              <section><h3>Coach Skill · 教练水平情境</h3><p>默认 Experienced=60；Beginner=25、Expert=90。六维雷达不变。逐项按同一球员“有技能/去掉该技能”做评分差分，按 Bloodboard V5 规则摘要里的执行依赖拆分 Passive Value 与 Skill-Expressive Value。<code>R=1−(1−CoachSkill/100)×mean(Execution Dependency,Role Complexity,Synergy Complexity,Mistake Punishment)/100</code>；<code>Realized Axis=Base Axis−Skill-Expressive Value×(1−R)</code>。球队按六轴权重合成实时 Strength，并在赛制内重新排 Tier；球员/明星详情也展示 Skill Floor（新手 Strength）、Skill Ceiling（高手 Strength）、执行复杂度和失误惩罚。球队的角色覆盖、协同关系与替补恢复会按名单和七/十一人制重算。当前是实验预览：技能执行依赖来自规则文本线索，角色复杂度、协同与失误惩罚仍需比赛/行为数据校准；不把预览榜当作官方实力结论。</p></section>
+              <section><h3>明星适用性与阵容性价比</h3><p>基础明星六维不随可选球队变化；明星阵容适配只按十一人制参考阵容评估，七人制因当前明星规则接入范围不足而不参与。令 <code>Q(T)=0.22快攻+0.18控球+0.16杀伤+0.15生存+0.15控场+0.14适应力</code>，<code>ΔQⱼ=Q(Tⱼ+明星组合)−Q(Tⱼ)</code>。主要适配价值为 <code>U=Σ合法候选阵容ΔQⱼ÷当前筛选下全部候选阵容数</code>，不可合法加入的阵容贡献记为0；因此它同时反映可用范围和加队后的增益大小。性价比排行为 <code>100,000×U÷明星/组合总价</code>。Dribl/Drull 等配对明星作为组合加入并按组合总价计算。正增益阵容率 <code>count(ΔQⱼ&gt;0)÷合法候选阵容数</code> 仅在详情中辅助展示，不能单独作为适用性分数：只有一套阵容且增益很小，也会有100%的正增益率。详情显示每队全部六维增减、合法可用数与候选数。若加入后超过 16 人，模型只按当前球队总评的前五维权重（22/18/16/15/15）比较原球员并移出分数最低者，再重算阵容。明星增益的六维权重与球队总评一致。当前模型不虚构队友配合、特殊规则的条件收益、站位、阵容预算重配或教练策略；参考名单覆盖度不是联赛出场概率。因而它是阵容影响代理，不是胜率、金币收益保证，也不替代个人能力评分。</p></section>
+              <section><h3>技能、明星规则与边界</h3><p>属性、基础技能、特性及明星规则通过相应任务分支改变概率或显示条件增益；一次性、配对、团队和依赖站位的效果不会假设整场无限使用。尚无队友/棋盘/对手输入的效果只作条件展示，避免假装它们必定触发。规则公式依据第三季规则书与 FAQ；动态规则适用性、完整回合选择、天气、教练策略、团队资源频率与各阈值校准仍需后续完善。任何综合分都不等于购买价值或胜率。</p></section>
+            </div>
+          </details>
+          <details class="method-formulas">
+            <summary>新引擎计算 · 失去球员后，队友能接替多少？</summary>
+            <p>同一棋盘、同一球队目标和同一资源预算，分别计算完整阵容与缺阵后重新分工的成功率。<code>队内重要性＝完整阵容最佳声明方案成功率−缺阵后最佳声明方案成功率</code>。只比较已声明的合法行动序列，不宣称搜索了整回合全部战术。</p>
+            <p>现在可在上方球队详情的“真实规则任务”面板，按实际名单选择焦点球员、压力、现有替补和有限重掷，查看接任结果与完整棋盘；应用临时编辑后的属性/技能也进入计算。当前 60 份名单的开阔/争夺两局面共 120 个均已算出；v3.31 的方案显式结束激活，结算 Bloodlust 等收尾。下表保留的是小局面诊断，完整名册因站位与接任者不同会得到不同结果。<span>120 个实际名册局面的可复算记录（后台资料）</span></p>
+            <div class="team-impact-scroll"><table><thead><tr><th>固定诊断局面</th><th>无团队重掷：完整 → 缺阵</th><th>允许一枚团队重掷：完整 → 缺阵</th></tr></thead><tbody>
+              <tr><th>开阔拾球，唯一 Sure Hands 缺阵</th><td>88.89% → 83.33% · 损失 5.56pp</td><td>97.22% → 97.22% · 损失 0</td></tr>
+              <tr><th>开阔拾球，仍有另一名 Sure Hands 接任</th><td>88.89% → 88.89% · 损失 0</td><td>97.22% → 97.22% · 损失 0</td></tr>
+              <tr><th>争夺区拾球，唯一 Sure Hands 缺阵</th><td>75.00% → 50.00% · 损失 25pp</td><td>75.00% → 75.00% · 损失 0</td></tr>
+              <tr><th>被标记的 Guard 缺阵，队友阻挡</th><td>75.00% → 50.00% · 损失 25pp</td><td>77.08% → 58.33% · 损失 18.75pp</td></tr>
+            </tbody></table></div>
+            <p>开阔拾球同时提供普通拾球与 Secure the Ball 候选；争夺区的 Secure 候选由引擎判为不合法。成功指行动结束后球队持球且没有 Turnover；Guard 例的成功指目标倒地或离场且没有 Turnover。重掷和阻挡骰面的处理沿用 Bloodboard 的行动策略。替补只在下一进攻段参考名单对照中进入原槽位，不能在当前进攻段临时换入。</p>
+            <p>这些是指定小局面的条件概率，不是球队整体成功率或正式六维等级，暂不改变上方旧评级。<span>查看完整条件与公式（后台资料）</span> · <span>查看可复算棋盘及结果（后台资料）</span></p>
+          </details>
+          <details class="method-formulas"><summary>真实规则任务 · 持球保护：本人保球与团队保球</summary><p>在实际名册参考站位上，选择合法持球人、来袭力量、普通/Strip Ball/Tackle 威胁和来袭方重掷。完整解析一次行动后，球在本人、队友、对手、地上或其他状态中的概率分别计数；球队保球＝本人＋队友，两者不是两个独立加分项。站立持球也从同一结果树直接计算。</p><p>当前两赛制 60 份名单 × 三种 ST3 威胁共 180 个参考局面；场景含真实防守助攻，但未模拟接近、最佳笼子、后续抢球和实战出现频率。<span>公式、条件与核验（后台资料）</span> · <span>180 个局面与完整复算输入（后台资料）</span></p></details>
+          <details class="method-formulas"><summary>任务终点 · 输入快照、完整激活与安全成功</summary><p>移动、拾球、球权恢复、转移、动态控场和条件犯规链已显式结算 endActivation；催眠开路先收尾再选择跑卫路线。Turnover 或达阵后停止，不执行后续真实行动。planAction 的输入快照保留为诊断，不冒充完整任务。</p><p>无 Thrall 的 Bloodlust 2+ / AG2 球员走一格：站立抵达 100%，安全完成及保有盯防区各为 83.33%；一步拾球的完整持球率 69.44%，Turnover 30.56%。这三个结果是不同事件，不相加为总分。<span>条件与公式（后台资料）</span> · <span>两赛制受控复算记录（后台资料）</span></p><p>受击后下回合任务若涉及来袭者 hungry Bloodlust 与 Turnover，当前引擎公共预览接口尚不能精确切换回合，该分支保留概率区间。</p></details>
+          <details class="method-formulas"><summary>真实规则任务 · 职责相关的可靠性与重掷资源</summary><p>可靠性按声明职责观察，不跨职责平均。原地 Block、重新部署、拾球、传球、交接、普通犯规、电锯与球链分别声明初始棋盘和目标；完整结算行动与结束激活后，分别统计输入执行、职责目标成功、Turnover、剩余重掷及成功与资源的联合事件。四项来自同一树，不重复加成。v3.32 另列目标状态和终点盯防区，明确与安全成功的区别。</p><p>130 种基础档案与 66 名明星共 343 个声明任务均已计算，13 个策略结果保留未解析区间。Take Root 原地 Block 不按移动失败率扣分；Really Stupid 的帮手必须满足真实站位条件；Pro/Loner 保留实际消耗策略。<span>公式、条件与核验（后台资料）</span> · <span>343 个任务与复算输入（后台资料）</span></p></details>
+          <details class="skill-map"><summary>查看第三季全部技能与特性映射</summary><label class="skill-map-search"><span>筛选</span><input id="skill-map-search" type="search" placeholder="技能名称、维度或规则情境"></label><div id="skill-map-body"></div></details>
+          <span>查看完整 Markdown 图鉴与原始名单依据 ↗（后台资料）</span>
+          <a href="https://www.warhammer-community.com/en-gb/downloads/blood-bowl/" target="_blank" rel="noopener">官方规则、FAQ 与勘误 ↗</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer"><a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span><strong>六维球探</strong><small>BLOOD BOWL ATLAS</small></span></a><span>原创像素奇幻主视觉 · 本地离线图鉴</span><span>素材与评分来源（后台资料）</span></footer>
+  </div>
+</body>
+</html>

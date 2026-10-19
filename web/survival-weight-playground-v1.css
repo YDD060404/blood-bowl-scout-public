@@ -1,0 +1,24 @@
+#survival-weight-playground{margin:2rem 0;padding:1.4rem;border:1px solid var(--line,#2a353d);border-radius:16px;background:var(--panel,#151f27);min-width:0}
+#survival-weight-playground .survival-weight-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:1.2rem 0}
+#survival-weight-playground .survival-weight-controls>div{padding:1rem;border:1px solid var(--line,#2a353d);border-radius:10px}
+#survival-weight-playground label,#survival-weight-playground strong[data-weight-share]{display:block;margin:.4rem 0}
+#survival-weight-playground input[type=range]{width:100%;accent-color:#89d1bd}
+#survival-weight-playground input[type=number]{width:6rem}
+#survival-weight-playground button,#survival-weight-playground input[type=number]{padding:.5rem;border:1px solid var(--line,#2a353d);border-radius:5px;color:var(--text,#e8edf0);background:var(--panel,#151f27)}
+#survival-weight-playground button{cursor:pointer}#survival-weight-playground [role=alert]{color:#ffbd9b}
+#survival-weight-playground select{padding:.5rem;border:1px solid var(--line,#2a353d);border-radius:5px;color:var(--text,#e8edf0);background:var(--panel,#151f27);max-width:100%}
+#survival-weight-playground .survival-weight-scroll{overflow:auto;max-width:100%;margin-top:1rem}
+#survival-weight-playground table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.9rem}
+#survival-weight-playground td,#survival-weight-playground th{padding:.7rem;text-align:left;border-bottom:1px solid var(--line,#2a353d);min-width:6rem}
+#survival-weight-playground th:nth-child(2){min-width:11rem}
+#survival-weight-playground small{display:block;color:var(--muted,#aab8bc);font-size:.75rem}
+#survival-weight-playground .survival-current-table td,#survival-weight-playground .survival-current-table th{padding:.55rem;min-width:4.2rem;white-space:nowrap}
+#survival-weight-playground .survival-current-table th:nth-child(2){min-width:6rem}
+#survival-weight-playground .survival-current-table td:first-child{min-width:2.5rem}
+#survival-weight-playground .survival-risk-comparison{margin:1.5rem 0;padding:1rem;border:1px solid #89d1bd;border-radius:10px;background:#89d1bd08}
+#bloodlust-cost-diagnostic{margin:2rem 0;padding:1.4rem;border:1px solid #b17c83;border-radius:16px;background:var(--panel,#151f27);min-width:0}
+#bloodlust-cost-diagnostic .survival-weight-scroll{overflow:auto;max-width:100%;margin:1rem 0}
+#bloodlust-cost-diagnostic table{width:100%;border-collapse:collapse;font-size:.88rem;font-variant-numeric:tabular-nums}
+#bloodlust-cost-diagnostic th,#bloodlust-cost-diagnostic td{padding:.6rem;border-bottom:1px solid var(--line,#2a353d);text-align:left;min-width:5rem}
+#bloodlust-cost-diagnostic select{color:var(--text,#e8edf0);background:var(--panel,#151f27);padding:.5rem;border:1px solid var(--line,#2a353d);max-width:100%}
+@media(max-width:650px){#survival-weight-playground{padding:.85rem}#survival-weight-playground .survival-weight-controls{grid-template-columns:1fr}}
